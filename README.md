@@ -1,6 +1,20 @@
 # Tally Arbiter M5 ATOM Matrix Listener
-## This version is only compatible with Tally Arbiter < 3.0. All future versions will be distributed as binaries from the master Tally Arbiter repository. This version has been archived and no future modifications will be made. Please make all feature requests, bug reports, and pull requests against the primary repository: http://github.com/josephdadams/tallyarbiter
 
+## EOL Notice
+
+**This version is only compatible with Tally Arbiter versions up to 2.x**
+
+All future versions will be distributed as binaries from the [Tally Arbiter repository](http://github.com/josephdadams/tallyarbiter).
+Please make all feature requests, bug reports, and pull requests against the primary repository.
+
+## Fork Notice
+
+This fork (`robo-w`) changes following behavior compared to the upstream:
+
+* The colors of preview and program (green and red) are shown on all pixels of the LED matrix.
+* On startup the number of the light is still shown, in order to check the currently configured number on the device.
+
+## Description
 
 Tally Arbiter M5 ATOM Matrix Listener is an accessory program that allows you to connect to a Tally Arbiter server and control an M5Stick-C ESP32 Arduino device from M5Stack based on the incoming tally information.
 

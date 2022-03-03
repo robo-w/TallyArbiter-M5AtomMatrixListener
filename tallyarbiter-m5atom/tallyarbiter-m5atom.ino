@@ -68,6 +68,22 @@ int wificolor[] = {GRB_COLOR_BLACK, GRB_COLOR_BLUE};
 
 int currentBrightness = 20;
 
+int no_number[25] = {
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0
+};
+
+int wifi_icon[25] = {
+  0, 0, 1, 1, 1,
+  0, 1, 0, 0, 0,
+  1, 0, 0, 1, 1,
+  1, 0, 1, 0, 0,
+  1, 0, 1, 0, 1
+};
+
 //this is the array that stores the number layout
 int number[19][25] = {{
     0, 0, 0, 0, 0,
@@ -246,22 +262,22 @@ void evaluateMode() {
   if (mode_preview && !mode_program) {
     logger("The device is in preview.", "info-quiet");
     M5.dis.clear();
-    drawNumber(number[camNumber], previewcolor);
+    drawNumber(no_number, previewcolor);
   }
   else if (!mode_preview && mode_program) {
     logger("The device is in program.", "info-quiet");
     M5.dis.clear();
-    drawNumber(number[camNumber], programcolor);
+    drawNumber(no_number, programcolor);
   }
   else if (mode_preview && mode_program) {
     logger("The device is in preview and program.", "info-quiet");
     M5.dis.clear();
-    drawNumber(number[camNumber], mixedcolor);
+    drawNumber(no_number, mixedcolor);
   }
   else {
     logger("The device is clear.", "info-quiet");
     M5.dis.clear();
-    drawNumber(number[camNumber], offcolor);
+    drawNumber(no_number, offcolor);
   }
 }
 
@@ -277,19 +293,19 @@ void showDeviceInfo() {
 void socket_Flash(const char * payload, size_t length) {
   //flash the screen white 3 times
   logger("The device flashed.", "info-quiet");
-  drawNumber(number[17], alloffcolor);
+  drawNumber(no_number, alloffcolor);
   delay(100);
-  drawNumber(number[17], flashcolor);
+  drawNumber(no_number, flashcolor);
   delay(100);
-  drawNumber(number[17], alloffcolor);
+  drawNumber(no_number, alloffcolor);
   delay(100);
-  drawNumber(number[17], flashcolor);
+  drawNumber(no_number, flashcolor);
   delay(100);
-  drawNumber(number[17], alloffcolor);
+  drawNumber(no_number, alloffcolor);
   delay(100);
-  drawNumber(number[17], flashcolor);
+  drawNumber(no_number, flashcolor);
   delay(100);
-  drawNumber(number[17], alloffcolor);
+  drawNumber(no_number, alloffcolor);
   delay(100);
   //then resume normal operation
   switch (currentScreen) {
@@ -314,15 +330,15 @@ void socket_Reassign(const char * payload, size_t length) {
   socket.emit("listener_reassign_object", charReassignObj);
   // Flash 2 times
 
-  drawNumber(number[17], alloffcolor);
+  drawNumber(wifi_icon, alloffcolor);
   delay(200);
-  drawNumber(number[18], wificolor);
+  drawNumber(wifi_icon, wificolor);
   delay(300);
-  drawNumber(number[17], alloffcolor);
+  drawNumber(wifi_icon, alloffcolor);
   delay(200);
-  drawNumber(number[18], wificolor);
+  drawNumber(wifi_icon, wificolor);
   delay(300);
-  drawNumber(number[17], alloffcolor);
+  drawNumber(wifi_icon, alloffcolor);
   delay(200);
   //
 
@@ -447,7 +463,7 @@ void setup() {
   M5.dis.drawpix(0, 0xf00000);
 
   // blanks out the screen
-  drawNumber(number[17], alloffcolor);
+  drawNumber(no_number, alloffcolor);
   delay(100); //wait 100ms before moving on
 
   connectToNetwork(); //starts Wifi connection
@@ -456,11 +472,11 @@ void setup() {
   }
   // Flash screen if connected to wifi.
   // Would like to animate this as a wifi logo in the future
-  drawNumber(number[17], alloffcolor);
+  drawNumber(wifi_icon, alloffcolor);
   delay(100);
-  drawNumber(number[18], wificolor);
+  drawNumber(wifi_icon, wificolor);
   delay(500);
-  drawNumber(number[17], alloffcolor);
+  drawNumber(wifi_icon, alloffcolor);
   delay(100);
 
   preferences.begin("tally-arbiter", false);
