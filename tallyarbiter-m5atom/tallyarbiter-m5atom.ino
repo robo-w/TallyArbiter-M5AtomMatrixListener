@@ -29,7 +29,8 @@ const char * networkPass = "YourPassword";
 const char * tallyarbiter_host = "TALLYARBITERSERVERIP";
 const int tallyarbiter_port = 4455;
 
-//Local Default Camera Number
+// Local Default Camera Number.
+// Only used for local display of the number in the screen. It does NOT impact any function. "0" results in a full screen color displayed.
 int camNumber = 0;
 
 //Tally Arbiter variables
@@ -39,10 +40,9 @@ JSONVar Devices;
 JSONVar DeviceStates;
 String DeviceId = "unassigned";
 String DeviceName = "unassigned";
-String ListenerType = "m5";
+String ListenerType = "m5-atom";
 bool mode_preview = true;
 bool mode_program = false;
-// const byte led_program = 10;
 
 
 // default color values
@@ -64,7 +64,9 @@ int flashcolor[] = {RGB_COLOR_WHITE, RGB_COLOR_WHITE};
 int offcolor[] = {RGB_COLOR_BLACK, numbercolor};
 int readycolour[] = {RGB_COLOR_BLUE, RGB_COLOR_BLUE};
 int alloffcolor[] = {RGB_COLOR_BLACK, RGB_COLOR_BLACK};
+
 int wificolor[] = {RGB_COLOR_BLACK, RGB_COLOR_BLUE};
+int wifi_dead_color[] = {RGB_COLOR_BLACK, RGB_COLOR_RED};
 
 int currentBrightness = 100;
 
@@ -74,6 +76,14 @@ int wifi_icon[25] = {
   1, 0, 0, 1, 1,
   1, 0, 1, 0, 0,
   1, 0, 1, 0, 1
+};
+
+int wifi_dead_icon[25] = {
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 1, 1,
+  0, 0, 1, 0, 0,
+  0, 0, 1, 0, 1
 };
 
 int all_leds_on[25] = {
@@ -457,25 +467,29 @@ void setup() {
 
   connectToNetwork(); //starts Wifi connection
   while (!networkConnected) {
-    delay(200);
+    drawNumber(wifi_dead_icon, wifi_dead_color);
+    delay(300);
+    drawNumber(wifi_dead_icon, alloffcolor);
+    delay(1200);
   }
+
   // Flash screen if connected to wifi.
   // Would like to animate this as a wifi logo in the future
   drawNumber(wifi_icon, alloffcolor);
   delay(100);
   drawNumber(wifi_icon, wificolor);
-  delay(500);
+  delay(800);
   drawNumber(wifi_icon, alloffcolor);
   delay(100);
 
   preferences.begin("tally-arbiter", false);
   if (preferences.getString("deviceid").length() > 0) {
-    //DeviceId = preferences.getString("deviceid");
-    DeviceId = "unassigned";
+    DeviceId = preferences.getString("deviceid");
+    //DeviceId = "unassigned";
   }
   if (preferences.getString("devicename").length() > 0) {
-    //DeviceName = preferences.getString("devicename");
-    DeviceName = "unassigned";
+    DeviceName = preferences.getString("devicename");
+    //DeviceName = "unassigned";
   }
   preferences.end();
 
