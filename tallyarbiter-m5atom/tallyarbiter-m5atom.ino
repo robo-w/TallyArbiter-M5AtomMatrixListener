@@ -46,25 +46,25 @@ bool mode_program = false;
 
 
 // default color values
-int GRB_COLOR_WHITE = 0xffffff;
-int GRB_COLOR_BLACK = 0x000000;
-int GRB_COLOR_RED = 0x00ff00;
-int GRB_COLOR_ORANGE = 0xa5ff00;
-int GRB_COLOR_YELLOW = 0xffff00;
-int GRB_COLOR_GREEN = 0xff0000;
-int GRB_COLOR_BLUE = 0x0000ff;
-int GRB_COLOR_PURPLE = 0x008080;
+int RGB_COLOR_WHITE = 0xffffff;
+int RGB_COLOR_BLACK = 0x000000;
+int RGB_COLOR_RED = 0xff0000;
+int RGB_COLOR_ORANGE = 0xffa500;
+int RGB_COLOR_YELLOW = 0xffff00;
+int RGB_COLOR_GREEN = 0x00ff00;
+int RGB_COLOR_BLUE = 0x0000ff;
+int RGB_COLOR_PURPLE = 0x800080;
 
-int numbercolor = GRB_COLOR_ORANGE;
+int numbercolor = RGB_COLOR_ORANGE;
 
-int programcolor[] = {GRB_COLOR_RED, numbercolor};
-int previewcolor[] = {GRB_COLOR_GREEN, numbercolor};
-int mixedcolor[] = {GRB_COLOR_RED, numbercolor};
-int flashcolor[] = {GRB_COLOR_WHITE, GRB_COLOR_WHITE};
-int offcolor[] = {GRB_COLOR_BLACK, numbercolor};
-int readycolour[] = {GRB_COLOR_BLUE, GRB_COLOR_BLUE};
-int alloffcolor[] = {GRB_COLOR_BLACK, GRB_COLOR_BLACK};
-int wificolor[] = {GRB_COLOR_BLACK, GRB_COLOR_BLUE};
+int programcolor[] = {RGB_COLOR_RED, numbercolor};
+int previewcolor[] = {RGB_COLOR_GREEN, numbercolor};
+int mixedcolor[] = {RGB_COLOR_RED, numbercolor};
+int flashcolor[] = {RGB_COLOR_WHITE, RGB_COLOR_WHITE};
+int offcolor[] = {RGB_COLOR_BLACK, numbercolor};
+int readycolour[] = {RGB_COLOR_BLUE, RGB_COLOR_BLUE};
+int alloffcolor[] = {RGB_COLOR_BLACK, RGB_COLOR_BLACK};
+int wificolor[] = {RGB_COLOR_BLACK, RGB_COLOR_BLUE};
 
 int currentBrightness = 20;
 
