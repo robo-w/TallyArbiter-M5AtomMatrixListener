@@ -15,6 +15,15 @@ This fork (`robo-w`) changes following behavior compared to the upstream:
 * On startup the number of the light is still shown, in order to check the currently configured number on the device.
 * Fixed ordering of colors for the use with `M5Atom` library 0.0.8 or higher. For older versions reverse red and green colors.
 
+With `M5Atom` library version 0.0.8 the brightness of the LEDs is drastically reduced:
+
+* The `FastLED` library offers a range of 0-255 for the brightness values.
+* In `LED_DisPlay.cpp` of `M5Atom` library the accepted brightness values are reduced to `0-100`, but then multiplied by `0.4` before handed over to the `FastLED` library.
+* So if you set `M5.dis.setBrightness(100);` you effectively get around 16 percent of the output power.
+* Option for a patch:
+** Comment line `brightness = (40 * brightness / 100);` in `LED_DisPlay.cpp:151`, in order to increase the effective range to around `0-40%`.
+** This patch is completely at your own risk! Check the temperature of your device, especially if you run it for a long time continuously.
+
 ## Description
 
 Tally Arbiter M5 ATOM Matrix Listener is an accessory program that allows you to connect to a Tally Arbiter server and control an M5Stick-C ESP32 Arduino device from M5Stack based on the incoming tally information.

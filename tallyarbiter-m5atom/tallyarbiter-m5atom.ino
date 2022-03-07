@@ -66,7 +66,7 @@ int readycolour[] = {RGB_COLOR_BLUE, RGB_COLOR_BLUE};
 int alloffcolor[] = {RGB_COLOR_BLACK, RGB_COLOR_BLACK};
 int wificolor[] = {RGB_COLOR_BLACK, RGB_COLOR_BLUE};
 
-int currentBrightness = 20;
+int currentBrightness = 100;
 
 int wifi_icon[25] = {
   0, 0, 1, 1, 1,
@@ -238,6 +238,7 @@ void WiFiEvent(WiFiEvent_t event) {
 //HERE IS THE MAIN LED DRAWING ROUTINE aka drawNumber
 void drawNumber(int arr[], int colors[])
 {
+  M5.dis.setBrightness(currentBrightness);
   for (int i = 0; i < 25; i++)
   {
     M5.dis.drawpix(i, colors[arr[i]]);
