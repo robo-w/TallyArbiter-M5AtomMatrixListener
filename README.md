@@ -11,7 +11,7 @@ Please make all feature requests, bug reports, and pull requests against the pri
 
 This fork (`robo-w`) changes following behavior compared to the upstream:
 
-* The colors of preview and program (green and red) are shown on all pixels of the LED matrix.
+* The colors of preview and program (green and red) are shown on all pixels of the LED matrix for the default cam number `0`, instead of leaving a dot in the middle.
 * On startup the number of the light is still shown, in order to check the currently configured number on the device.
 
 ## Description

@@ -68,14 +68,6 @@ int wificolor[] = {GRB_COLOR_BLACK, GRB_COLOR_BLUE};
 
 int currentBrightness = 20;
 
-int no_number[25] = {
-  0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0
-};
-
 int wifi_icon[25] = {
   0, 0, 1, 1, 1,
   0, 1, 0, 0, 0,
@@ -84,11 +76,19 @@ int wifi_icon[25] = {
   1, 0, 1, 0, 1
 };
 
+int all_leds_on[25] = {
+  1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1
+};
+
 //this is the array that stores the number layout
-int number[19][25] = {{
+int number[17][25] = {{
     0, 0, 0, 0, 0,
     0, 0, 0, 0, 0,
-    0, 0, 1, 0, 0,
+    0, 0, 0, 0, 0,
     0, 0, 0, 0, 0,
     0, 0, 0, 0, 0
   },
@@ -188,18 +188,6 @@ int number[19][25] = {{
     0, 0, 0, 0, 0,
     1, 1, 1, 1, 1
   },
-  { 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1
-  },
-  { 0, 0, 1, 1, 1,
-    0, 1, 0, 0, 0,
-    1, 0, 0, 1, 1,
-    1, 0, 1, 0, 0,
-    1, 0, 1, 0, 1
-  },
 };
 
 // Logger - logs to serial number
@@ -262,22 +250,22 @@ void evaluateMode() {
   if (mode_preview && !mode_program) {
     logger("The device is in preview.", "info-quiet");
     M5.dis.clear();
-    drawNumber(no_number, previewcolor);
+    drawNumber(number[camNumber], previewcolor);
   }
   else if (!mode_preview && mode_program) {
     logger("The device is in program.", "info-quiet");
     M5.dis.clear();
-    drawNumber(no_number, programcolor);
+    drawNumber(number[camNumber], programcolor);
   }
   else if (mode_preview && mode_program) {
     logger("The device is in preview and program.", "info-quiet");
     M5.dis.clear();
-    drawNumber(no_number, mixedcolor);
+    drawNumber(number[camNumber], mixedcolor);
   }
   else {
     logger("The device is clear.", "info-quiet");
     M5.dis.clear();
-    drawNumber(no_number, offcolor);
+    drawNumber(number[camNumber], offcolor);
   }
 }
 
@@ -293,19 +281,19 @@ void showDeviceInfo() {
 void socket_Flash(const char * payload, size_t length) {
   //flash the screen white 3 times
   logger("The device flashed.", "info-quiet");
-  drawNumber(no_number, alloffcolor);
+  drawNumber(all_leds_on, alloffcolor);
   delay(100);
-  drawNumber(no_number, flashcolor);
+  drawNumber(all_leds_on, flashcolor);
   delay(100);
-  drawNumber(no_number, alloffcolor);
+  drawNumber(all_leds_on, alloffcolor);
   delay(100);
-  drawNumber(no_number, flashcolor);
+  drawNumber(all_leds_on, flashcolor);
   delay(100);
-  drawNumber(no_number, alloffcolor);
+  drawNumber(all_leds_on, alloffcolor);
   delay(100);
-  drawNumber(no_number, flashcolor);
+  drawNumber(all_leds_on, flashcolor);
   delay(100);
-  drawNumber(no_number, alloffcolor);
+  drawNumber(all_leds_on, alloffcolor);
   delay(100);
   //then resume normal operation
   switch (currentScreen) {
@@ -463,7 +451,7 @@ void setup() {
   M5.dis.drawpix(0, 0xf00000);
 
   // blanks out the screen
-  drawNumber(no_number, alloffcolor);
+  drawNumber(all_leds_on, alloffcolor);
   delay(100); //wait 100ms before moving on
 
   connectToNetwork(); //starts Wifi connection
