@@ -23,8 +23,8 @@ With `M5Atom` library version 0.0.8 the brightness of the LEDs is drastically re
 * In `LED_DisPlay.cpp` of `M5Atom` library the accepted brightness values are reduced to `0-100`, but then multiplied by `0.4` before handed over to the `FastLED` library.
 * So if you set `M5.dis.setBrightness(100);` you effectively get around 16 percent of the output power.
 * Option for a patch:
-** Comment line `brightness = (40 * brightness / 100);` in `LED_DisPlay.cpp:151`, in order to increase the effective range to around `0-40%`.
-** This patch is completely at your own risk! Check the temperature of your device, especially if you run it for a long time continuously.
+  * Comment line `brightness = (40 * brightness / 100);` in `LED_DisPlay.cpp:151`, in order to increase the effective range to around `0-40%`.
+  * This patch is completely at your own risk! Check the temperature of your device, especially if you run it for a long time continuously.
 
 ## Description
 
